@@ -1,0 +1,11 @@
+{
+  "name": "dbtosb",
+  "version": "1.0.0",
+  "description": "Convert double byte width digit and english letter into single byte",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "jasonlhy",
+  "license": "ISC"
+}
