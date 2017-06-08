@@ -1,7 +1,13 @@
 var process = require('process');
 var dbtosb = require("./dbtosb.js");
 
-process.stdin.setEncoding('utf8');
+var incode = process.argv[2] || 'utf8';
+var outcode = process.argv[3];
+
+process.stdin.setEncoding(incode);
+if (outcode){
+    process.stdout.setEncoding(outcode); 
+}
 
 process.stdin.on('readable', () => {
     const chunk = process.stdin.read();
