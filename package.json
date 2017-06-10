@@ -1,6 +1,6 @@
 {
   "name": "dbtosb",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Convert double byte width digit and english letter into single byte",
   "main": "app.js",
   "scripts": {
