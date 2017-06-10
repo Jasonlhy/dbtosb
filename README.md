@@ -7,12 +7,18 @@ For example:
 
 # API
 
+```js
+var dbtosb = require("./dbtosb.js");
+var result = dbtosb.convert("ＱＷＥＲＴＹＵＩＯＰＡＳＤＦＧＨＪＫＬＺＸＣＶＢＮＭ");
+```
+
 # Command Line
-It reads from the standard input
-`dbtosb < "Text.Line"`
+It reads from the standard input and output to standard output.
+
+`dbtosb < "Text.txt"`
 
 ## Specify the encoding of input text file
-`dbtosb utf8 < "Text.Line"`
+`dbtosb utf8 < "Text.txt"`
 
 ## Specify the encoding of output text
-`dbtosb utf8 utf8 < "Text.Line"`
+`dbtosb utf8 utf8 < "Text.txxt"`
