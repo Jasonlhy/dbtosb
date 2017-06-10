@@ -4,6 +4,23 @@ Convert double byte english letters, digit and some control characeter into sing
 Currently it has this mapping:
 ```js
 var mapping = {
+    /* \uFF01 Segment */
+    // Skip: ！，
+    "‵": "`",
+    "＂": "\"",
+    "＃": "#",
+    "＄": "$",
+    "％": "%",
+    "＆": "&",
+    "＇": "'",
+    "（" : "(",
+    "）" : ")",
+    "＊" : "*",
+    "＋" : "+",
+    "－": "-",
+    "．": ".",
+    "／" : "/",
+    /* Digit */
     "０": "0",
     "１": "1",
     "２": "2",
@@ -14,6 +31,13 @@ var mapping = {
     "７": "7",
     "８": "8",
     "９": "9",
+    /* \uFF1A Segment */
+    // Skip：；？
+    "＜": "<",    
+    "＝": "=",    
+    "＞": ">",    
+    "＠": "@",    
+    /* Upper Case Letter */
     "Ａ": "A",
     "Ｂ": "B",
     "Ｃ": "C",
@@ -40,6 +64,13 @@ var mapping = {
     "Ｘ": "X",
     "Ｙ": "Y",
     "Ｚ": "Z",
+    "［": "[",
+    "＼": "\\",
+    "］": "]",
+    "＾": "^",
+    "＿": "_",
+    "｀": "`",
+    /* Lower Case Letter */
     "ａ": "a",
     "ｂ": "b",
     "ｃ": "c",
@@ -66,21 +97,15 @@ var mapping = {
     "ｘ": "x",
     "ｙ": "y",
     "ｚ": "z",
-    "　": " ",
-    "‵": "`",
-    "＂": "\"",
-    "＇": "'",
+    /* \uFF3B Segment */ 
     "｛": "{",
+    "｜": "|",
     "｝": "}",
-    "［": "[",
-    "］": "]",
-    "＠": "@",
-    "（" : "(",
-    "）" : ")",
-    "＋" : "+",
-    "—" : "-",
-    "＊" : "*",
-    "／" : "/"
+    "～": "~",
+    /* Special Spacing */
+    "　": " ",
+    /* Ｃangjie Input */
+    "—" : "-"
 }
 ```
 
@@ -88,20 +113,26 @@ For example:
 "Ｒｅｇｕｌａｒ　Ｅｘｐｒｅｓｓｉｏｎ　０１" is converted into
 "Regular Expression 01"
 
-# API
+# Install 
+
+`npm install -g dbtosb`
+
+# Usage
+
+## API
 
 ```js
 var dbtosb = require("./dbtosb.js");
 var result = dbtosb.convert("ＱＷＥＲＴＹＵＩＯＰＡＳＤＦＧＨＪＫＬＺＸＣＶＢＮＭ");
 ```
 
-# Command Line
+## Command Line
 It reads from the standard input and output to standard output.
 
 `dbtosb < "Text.txt"`
 
-## Specify the encoding of input text file
+### Specify the encoding of input text file
 `dbtosb utf8 < "Text.txt"`
 
-## Specify the encoding of output text
+### Specify the encoding of output text
 `dbtosb utf8 utf8 < "Text.txxt"`
