@@ -1,5 +1,5 @@
 # Objective
-Convert double byte english letters, digit and some control characeter into single byte ascii letter.
+Convert double byte english letters, digit and some control characeter (全形) into single byte ascii letter (半形).
 
 Currently it has this mapping:
 ```js
