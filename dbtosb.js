@@ -414,3 +414,4 @@ function isValidStyle(styleName) {
 
 module.exports.convert = dbtosb;
 module.exports.isValidStyle = isValidStyle;
+module.exports.getAvailableStyles = function () { return Object.getOwnPropertyNames(styles); }

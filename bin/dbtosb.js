@@ -15,6 +15,18 @@ var argv = require('yargs').options({
         alias: 'outputFile',
         type: 'string'
     },
+    's':{
+        alias: 'style',
+        type: 'string'
+    },
+    'e':{
+        alias: 'extendList',
+        type: 'string'
+    },
+    'i': {
+        alias: 'ignoreList',
+        type: 'string'
+    }
 }).argv;
 
 (function () {
@@ -23,6 +35,14 @@ var argv = require('yargs').options({
     var OUT_ENCODING = argv['t'];
     var OUT_FILE_PATH = argv['o'];
     var IN_FILE_PATH = argv._[0];
+    var STYLE_NAME = argv['s'];
+    var EXTEND_LIST = argv['e'];
+    var IGNORE_LIST = argv['i'];
+
+    if (!dbtosb.isValidStyle(STYLE_NAME)){
+        process.stderr.write("The Style Name is not valid\n");
+        process.stderr.write("All style available: " + dbtosb.getAvailableStyles() + "\n");
+    }
 
     /**
      * Read text from Standard Input
@@ -62,7 +82,7 @@ var argv = require('yargs').options({
             options['encoding'] = OUT_ENCODING;
         }
 
-        var output = dbtosb.convert(data);
+        var output = dbtosb.convert(data, STYLE_NAME, EXTEND_LIST, IGNORE_LIST);
         fs.writeFile(filePath, output, options, function (err) {
             if (err) throw err;
         });
@@ -79,7 +99,7 @@ var argv = require('yargs').options({
         }
 
         if (data !== null) {
-            var output = dbtosb.convert(data);
+            var output = dbtosb.convert(data, STYLE_NAME, EXTEND_LIST, IGNORE_LIST);
             process.stdout.write(output);
         }
     }
