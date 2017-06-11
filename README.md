@@ -117,22 +117,39 @@ For example:
 
 `npm install -g dbtosb`
 
-# Usage
-
-## API
+# API
 
 ```js
 var dbtosb = require("./dbtosb.js");
 var result = dbtosb.convert("ＱＷＥＲＴＹＵＩＯＰＡＳＤＦＧＨＪＫＬＺＸＣＶＢＮＭ");
 ```
 
-## Command Line
-It reads from the standard input and output to standard output.
+# Command Line
 
-`dbtosb < "Text.txt"`
+dbtosb [InputFilePath] [-o OutputFilePath ] [-f EncodingOfInput] [-t EncodingOfOutput]
 
-### Specify the encoding of input text file
-`dbtosb utf8 < "Text.txt"`
+- By default, the output go to standard output. 
+- If InputFilePath do not exist, It reads from the standard input.
+- `-o`: Path of output file
+- `-f`: Encoding of input
+- `-t`: Encoding of output
 
-### Specify the encoding of output text
-`dbtosb utf8 utf8 < "Text.txxt"`
+## Standard Input to Standard Output 
+```
+> dbtosb < "../test.txt"
+
+QWERTYUIOPASDFGHJKLZXCVBNM
+
+qwertyuiopasdfghjklzxcvbnm
+
+0123456789
+```
+
+## Read from file and write to a file
+`dbtosb "dbtosb.js" -o "out.txt"`
+
+## Specify the encoding of input
+`dbtosb -f utf8 < "Text.txt"`
+
+## Specify the encoding of both input and output
+`dbtosb -f utf8 -t utf8 < "Text.txxt"`
