@@ -106,7 +106,7 @@ var styles = (function () {
 
     var all = {
         /* \uFF01 Segment */
-        // Skip: ！，
+        "！": "!",
         "‵": "`",
         "＂": "\"",
         "＃": "#",
@@ -118,6 +118,7 @@ var styles = (function () {
         "）": ")",
         "＊": "*",
         "＋": "+",
+        "，": ",",
         "－": "-",
         "．": ".",
         "／": "/",
@@ -133,11 +134,13 @@ var styles = (function () {
         "８": "8",
         "９": "9",
         /* \uFF1A Segment */
-        // Skip：；？
+        "：": ":",
+        "；": ";",
         "＜": "<",
         "＝": "=",
         "＞": ">",
         "＠": "@",
+        "？": "?",
         /* Upper Case Letter */
         "Ａ": "A",
         "Ｂ": "B",
@@ -364,13 +367,13 @@ var styles = (function () {
 })();
 
 /**
- * 
- * 
+ *
+ *
  * @param {string} inputStr
  * @param {string} styleName
  * @param {string} extendList
  * @param {string} ignoreList
- * @returns 
+ * @returns
  */
 function dbtosb(inputStr, styleName, extendList, ignoreList) {
     if (!inputStr) return inputStr;
@@ -401,9 +404,9 @@ function dbtosb(inputStr, styleName, extendList, ignoreList) {
 }
 
 /**
- * 
- * @param {string} styleName 
- * @returns 
+ *
+ * @param {string} styleName
+ * @returns
  */
 function isValidStyle(styleName) {
     return styles[styleName] !== undefined
