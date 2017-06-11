@@ -1,117 +1,9 @@
 # Objective
-Convert double byte english letters, digit and some control characeter (全形) into single byte ascii letter (半形).
-
-Currently it has this mapping:
-```js
-var mapping = {
-    /* \uFF01 Segment */
-    // Skip: ！，
-    "‵": "`",
-    "＂": "\"",
-    "＃": "#",
-    "＄": "$",
-    "％": "%",
-    "＆": "&",
-    "＇": "'",
-    "（" : "(",
-    "）" : ")",
-    "＊" : "*",
-    "＋" : "+",
-    "－": "-",
-    "．": ".",
-    "／" : "/",
-    /* Digit */
-    "０": "0",
-    "１": "1",
-    "２": "2",
-    "３": "3",
-    "４": "4",
-    "５": "5",
-    "６": "6",
-    "７": "7",
-    "８": "8",
-    "９": "9",
-    /* \uFF1A Segment */
-    // Skip：；？
-    "＜": "<",    
-    "＝": "=",    
-    "＞": ">",    
-    "＠": "@",    
-    /* Upper Case Letter */
-    "Ａ": "A",
-    "Ｂ": "B",
-    "Ｃ": "C",
-    "Ｄ": "D",
-    "Ｅ": "E",
-    "Ｆ": "F",
-    "Ｇ": "G",
-    "Ｈ": "H",
-    "Ｉ": "I",
-    "Ｊ": "J",
-    "Ｋ": "K",
-    "Ｌ": "L",
-    "Ｍ": "M",
-    "Ｎ": "N",
-    "Ｏ": "O",
-    "Ｐ": "P",
-    "Ｑ": "Q",
-    "Ｒ": "R",
-    "Ｓ": "S",
-    "Ｔ": "T",
-    "Ｕ": "U",
-    "Ｖ": "V",
-    "Ｗ": "W",
-    "Ｘ": "X",
-    "Ｙ": "Y",
-    "Ｚ": "Z",
-    "［": "[",
-    "＼": "\\",
-    "］": "]",
-    "＾": "^",
-    "＿": "_",
-    "｀": "`",
-    /* Lower Case Letter */
-    "ａ": "a",
-    "ｂ": "b",
-    "ｃ": "c",
-    "ｄ": "d",
-    "ｅ": "e",
-    "ｆ": "f",
-    "ｇ": "g",
-    "ｈ": "h",
-    "ｉ": "i",
-    "ｊ": "j",
-    "ｋ": "k",
-    "ｌ": "l",
-    "ｍ": "m",
-    "ｎ": "n",
-    "ｏ": "o",
-    "ｐ": "p",
-    "ｑ": "q",
-    "ｒ": "r",
-    "ｓ": "s",
-    "ｔ": "t",
-    "ｕ": "u",
-    "ｖ": "v",
-    "ｗ": "w",
-    "ｘ": "x",
-    "ｙ": "y",
-    "ｚ": "z",
-    /* \uFF3B Segment */ 
-    "｛": "{",
-    "｜": "|",
-    "｝": "}",
-    "～": "~",
-    /* Special Spacing */
-    "　": " ",
-    /* Ｃangjie Input */
-    "—" : "-"
-}
-```
-
-For example:
+Convert double byte english letters, digit and some control characeter (全形) into single byte ascii letter (半形). For example:
 "Ｒｅｇｕｌａｒ　Ｅｘｐｒｅｓｓｉｏｎ　０１" is converted into
 "Regular Expression 01"
+
+The mapping can be viewed at [github](https://github.com/Jasonlhy/dbtosb/blob/master/dbtosb.js), the default style is programmer. You can choose the style you like, and you can also provide extend list of ignore list if the default style doesn't quite fit your need.
 
 # Install 
 
@@ -119,20 +11,31 @@ For example:
 
 # API
 
+## Default Style(programmer), No Extend and No Ignore List
 ```js
 var dbtosb = require("./dbtosb.js");
 var result = dbtosb.convert("ＱＷＥＲＴＹＵＩＯＰＡＳＤＦＧＨＪＫＬＺＸＣＶＢＮＭ");
 ```
 
+## Only Convert Digit, Extend to Convert n and Ignore to Convert 1
+```js
+var ignore = dbtosb.convert("ｒｅｇｕｌａｒ　ｅｘｐｒｅｓｓｉｏｎ　０１", "digit", "n", "1");
+var expected = "ｒｅｇｕｌａｒ　ｅｘｐｒｅｓｓｉｏn　0１"
+console.log(expected == ignore);
+```
+
 # Command Line
 
-dbtosb [InputFilePath] [-o OutputFilePath ] [-f EncodingOfInput] [-t EncodingOfOutput]
+dbtosb [InputFilePath] [-o OutputFilePath ] [-f EncodingOfInput] [-t EncodingOfOutput] [-s StyleName] [-e ExtendList] [-i IgnoreList]
 
 - By default, the output go to standard output. 
 - If InputFilePath do not exist, It reads from the standard input.
 - `-o`: Path of output file
 - `-f`: Encoding of input
 - `-t`: Encoding of output
+- `-s`: Style Name of the mapping: "programmer","all","digit","letter","digitLetter","space", default is "programmer"
+- `-e`: Extend List of conversion
+- `-i`: Ignore List of conversion
 
 ## Standard Input to Standard Output 
 ```
@@ -153,3 +56,11 @@ qwertyuiopasdfghjklzxcvbnm
 
 ## Specify the encoding of both input and output
 `dbtosb -f utf8 -t utf8 < "Text.txxt"`
+
+## Specify Style
+`dbtosb -s "digit" < "Text.txxt"`
+
+## Specify Digit Style, Extend List and Convert List
+This example only Converts Digit, Extend to Convert n and Ignore to Convert 1.
+
+`dbtosb -s "digit" -e "n" -i "1" < "Text.txxt"`
