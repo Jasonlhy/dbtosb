@@ -1,6 +1,6 @@
 {
   "name": "dbtosb",
-  "version": "1.0.6",
+  "version": "1.1.0",
   "description": "Convert double byte width digit and english letter into single byte",
   "main": "app.js",
   "scripts": {
@@ -9,6 +9,10 @@
   "bin" :  { "dbtosb" : "./bin/dbtosb.js"  },
   "dependencies": {
     "yargs" : "^8.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Jasonlhy/dbtosb.git"    
   },
   "author": "jasonlhy",
   "license": "ISC"
