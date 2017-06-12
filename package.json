@@ -2,7 +2,7 @@
   "name": "dbtosb",
   "version": "1.2.1",
   "description": "Convert double byte width digit and english letter into single byte",
-  "main": "app.js",
+  "main": "dbtosb.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
