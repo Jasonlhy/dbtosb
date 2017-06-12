@@ -39,7 +39,7 @@ var argv = require('yargs').options({
     var EXTEND_LIST = argv['e'];
     var IGNORE_LIST = argv['i'];
 
-    if (!dbtosb.isValidStyle(STYLE_NAME)){
+    if (STYLE_NAME && !dbtosb.isValidStyle(STYLE_NAME)){
         process.stderr.write("The Style Name is not valid\n");
         process.stderr.write("All style available: " + dbtosb.getAvailableStyles() + "\n");
     }
